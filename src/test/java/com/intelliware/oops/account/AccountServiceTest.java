@@ -3,10 +3,10 @@ package com.intelliware.oops.account;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class AccountControllerTest {
+public class AccountServiceTest {
     @Test
     public void getCurrentAccount() {
-        AccountController accountController = new AccountController();
+        AccountService accountController = new AccountService();
 
         Account account = accountController.getCurrentAccount();
 
