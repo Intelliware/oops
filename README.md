@@ -21,7 +21,7 @@ Enable Chaos Monkey to introduce failures by activating the `chaos-monkey` profi
 ./mvnw spring-boot:run -Dspring-boot.run.profiles=chaos-monkey,chaos_medium
 ```
 Level Options:
-- `chaos_low`
+- `chaos_delays`
 - `chaos_medium`
 - `chaos_total`
 
@@ -68,6 +68,28 @@ A number of chaos levels have been specified as spring profiles.
 > t < 800 ms                                          2700 (100%)
 > 800 ms < t < 1200 ms                                   0 (  0%)
 > t > 1200 ms                                            0 (  0%)
+> failed                                                 0 (  0%)
+================================================================================
+```
+### Delays Only
+
+``` 
+================================================================================
+---- Global Information --------------------------------------------------------
+> request count                                       2700 (OK=2700   KO=0     )
+> min response time                                      3 (OK=3      KO=-     )
+> max response time                                   2995 (OK=2995   KO=-     )
+> mean response time                                   112 (OK=112    KO=-     )
+> std deviation                                        469 (OK=469    KO=-     )
+> response time 50th percentile                          5 (OK=5      KO=-     )
+> response time 75th percentile                          6 (OK=6      KO=-     )
+> response time 95th percentile                       1067 (OK=1067   KO=-     )
+> response time 99th percentile                       2597 (OK=2597   KO=-     )
+> mean requests/sec                                  56.25 (OK=56.25  KO=-     )
+---- Response Time Distribution ------------------------------------------------
+> t < 800 ms                                          2560 ( 95%)
+> 800 ms < t < 1200 ms                                  13 (  0%)
+> t > 1200 ms                                          127 (  5%)
 > failed                                                 0 (  0%)
 ================================================================================
 ```
