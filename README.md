@@ -43,6 +43,27 @@ Run a default gatling test from the command line.
 
 ```
 
+## Server Management Endpoints
+
+Enabled by metrics profile.
+``` 
+./mvnw spring-boot:run -Dspring-boot.run.profiles=metrics
+```
+
+General:
+
+- localhost:8080/actuator/health
+- localhost:8080/actuator/info
+
+Chaos Monkey:
+
+- localhost:8080/actuator/chaosmonkey
+- localhost:8080/actuator/chaosmonkey/status
+
+Hystrix:
+
+- localhost:8080/actuator/hystrix.stream
+
 ## Gatling Results for Chaos Levels
 
 A number of chaos levels have been specified as spring profiles.

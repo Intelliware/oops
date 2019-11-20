@@ -11,7 +11,7 @@ chaos:
       level: 1
       latencyRangeStart: 1000
       latencyRangeEnd: 3000
-      latencyActive: true
+      latencyActive: false
       exceptionsActive: true
       killApplicationActive: false
       watchedCustomServices: com.intelliware.oops.adapter.AccountAddressAdapter,com.intelliware.oops.adapter.AccountBalanceAdapter

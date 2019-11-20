@@ -23,14 +23,18 @@ public class AccountService {
         Account account = new Account();
         account.setAccountNumber(accountId);
         account.setCurrentAddress(currentAddress(accountId));
-        account.setCurrentBalance(overnightBalance/*currentBalance*/(accountId));
+        account.setCurrentBalance(currentBalance(accountId));
         return account;
     }
 
     @HystrixCommand(fallbackMethod = "overnightBalance")
     private BigDecimal currentBalance(String accountId) {
-        throw new RuntimeException("bloh");
-//        return accountBalanceAdapter.currentBalance(accountId);
+        try {
+            return accountBalanceAdapter.currentBalance(accountId);
+        } catch (RuntimeException e) {
+            System.out.println("Exception during current balancae: " + e);
+            throw e;
+        }
     }
 
     @HystrixCommand(fallbackMethod = "failedBalanceRequest")
@@ -38,7 +42,6 @@ public class AccountService {
         return accountBalanceAdapter.overnightBalance(accountId);
     }
 
-    @HystrixCommand
     private BigDecimal failedBalanceRequest(String accountId) {
         return null;
     }
@@ -48,7 +51,6 @@ public class AccountService {
         return accountAddressAdapter.currentAddress(accountId);
     }
 
-    @HystrixCommand
     private Address blankAddress(String accountId) {
         return new Address();
     }

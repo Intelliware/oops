@@ -16,6 +16,7 @@ public class AccountBalanceAdapter {
 
     public BigDecimal currentBalance(String accountId) {
         // Pretend to call some external service and return the result....
+//        throw new RuntimeException("failed to get current balance!");
         return new BigDecimal("99.00");
     }
 
