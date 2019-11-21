@@ -10,7 +10,7 @@ chaos:
     assaults:
       level: 1
       latencyRangeStart: 1000
-      latencyRangeEnd: 3000
+      latencyRangeEnd: 10000
       latencyActive: false
       exceptionsActive: true
       killApplicationActive: false

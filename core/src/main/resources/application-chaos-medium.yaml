@@ -8,9 +8,9 @@ chaos:
       restController: true
       service: false
     assaults:
-      level: 5
+      level: 8
       latencyRangeStart: 1000
-      latencyRangeEnd: 3000
+      latencyRangeEnd: 7000
       latencyActive: true
       exceptionsActive: true
       killApplicationActive: false
