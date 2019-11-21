@@ -1,40 +1,53 @@
 # OOPS
 
-Explore resiliency with Hysterix, Chaos Monkey, and Gatling.
+Explore resiliency with Hystrix, Chaos Monkey, and Gatling.
 
-## Build
+Architecture:
+- Server - Entry server with an `/accounts` restful endpoint.
+- Core - Core services with restful endpoints supporting accounts: currentBalance, overnightBalance, and location address.
 
-./mvn clean install
+## Build and Run
 
-## Run Normal mode
+./mvnw clean install
 
-Run the application chaos free:
+### Start Core Services
 ```
-./mvnw spring-boot:run
-```
+cd core && ./mvnw spring-boot:run && cd ..
 
-## Run with Chaos
+curl localhost:8081/address/1234
+```
+### Start Server
+
+``` 
+cd server && ./mvnw spring-boot:run && cd ..
+
+curl localhost:8080/accounts
+```
+## Run Core with Chaos
 
 Enable Chaos Monkey to introduce failures by activating the `chaos-monkey` profile and one of the specified chaos levels.
 
+Stop the core service if currently running.
+
 ```
-./mvnw spring-boot:run -Dspring-boot.run.profiles=chaos-monkey,chaos_medium
+cd core && ./mvnw spring-boot:run -Dspring-boot.run.profiles=chaos-monkey,chaos-medium && cd ..
 ```
 Level Options:
 - `chaos_delays`
 - `chaos_medium`
 - `chaos_total`
 
-## Accounts API
+## View Hystrix
 
-Simple Restful API to trigger the server and service calls.
+View the Hystrix dashboard by opening the following in a web browser:
 
+http://localhost:8080/hystrix/monitor?stream=http://localhost:8080/actuator/hystrix.stream&title=oops
+
+Configure the Core to produce provide some errors timeout requests:
+
+``` 
+cd core && ./mvnw spring-boot:run -Dspring-boot.run.profiles=chaos-monkey,chaos-medium && cd ..
 ```
-curl localhost:8080/accounts
-
-```
-
-## Gatling
 
 Run a default gatling test from the command line.
 
@@ -43,11 +56,13 @@ Run a default gatling test from the command line.
 
 ```
 
+As the gatling test is running you should see the Hystrix dashboard being updated.
+
 ## Server Management Endpoints
 
 Enabled by metrics profile.
 ``` 
-./mvnw spring-boot:run -Dspring-boot.run.profiles=metrics
+cd server && ./mvnw spring-boot:run -Dspring-boot.run.profiles=metrics && cd ..
 ```
 
 General:
@@ -70,7 +85,7 @@ A number of chaos levels have been specified as spring profiles.
 
 ### No Chaos
 
-./mvnw spring-boot:run
+-Dspring-boot.run.profiles=
 
 ``` 
 ================================================================================
@@ -93,6 +108,8 @@ A number of chaos levels have been specified as spring profiles.
 ================================================================================
 ```
 ### Delays Only
+
+-Dspring-boot.run.profiles=chaos-monkey,chaos-delays
 
 ``` 
 ================================================================================
@@ -117,7 +134,7 @@ A number of chaos levels have been specified as spring profiles.
 
 ### Medium Chaos
 
-./mvnw spring-boot:run -Dspring-boot.run.profiles=chaos-monkey,chaos_medium
+-Dspring-boot.run.profiles=chaos-monkey,chaos-medium
 
 ```
 ================================================================================

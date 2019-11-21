@@ -12,7 +12,7 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 
 
-//@EnableHystrixDashboard
+@EnableHystrixDashboard
 @EnableFeignClients
 @EnableCircuitBreaker
 @SpringBootApplication
