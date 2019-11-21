@@ -1,0 +1,23 @@
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: FULL
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health,info,hystrix.stream"
+
+server:
+  port: 8080
+
+spring:
+  application:
+    name: Oops-Server
+
+core:
+  url: http://localhost:8081
