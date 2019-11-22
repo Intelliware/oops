@@ -16,19 +16,21 @@ public class AccountAddressAdapterTest {
     @Mock AddressClient addressClient;
     @InjectMocks AccountAddressAdapter accountAddressAdapter;
 
+    private static final String ACCOUNT_ID = "12345";
+
     @Test
     public void getAddressForAccountId() {
         Address address = new Address();
-        when(addressClient.getAddress("12345")).thenReturn(address);
+        when(addressClient.getAddress(ACCOUNT_ID)).thenReturn(address);
 
-        Address actualAddress = accountAddressAdapter.currentAddress("12345");
+        Address actualAddress = accountAddressAdapter.currentAddress(ACCOUNT_ID);
 
         assertThat(actualAddress, is(address));
     }
 
     @Test
     public void blankAddress() {
-        Address actualAddress = accountAddressAdapter.blankAddress("12345");
+        Address actualAddress = accountAddressAdapter.blankAddress(ACCOUNT_ID);
 
         assertThat(actualAddress, notNullValue());
     }
