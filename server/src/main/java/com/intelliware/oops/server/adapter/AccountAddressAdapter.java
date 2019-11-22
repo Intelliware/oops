@@ -22,7 +22,7 @@ public class AccountAddressAdapter {
         return addressClient.getAddress(accountId);
     }
 
-    private Address blankAddress(String accountId) {
+    Address blankAddress(String accountId) {
         return new Address();
     }
 }

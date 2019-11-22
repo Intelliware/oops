@@ -1,8 +1,8 @@
 package com.intelliware.oops.server.adapter;
 
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.when;
-import static org.hamcrest.Matchers.is;
 
 import com.intelliware.oops.server.account.Address;
 import org.junit.Test;
@@ -24,6 +24,13 @@ public class AccountAddressAdapterTest {
         Address actualAddress = accountAddressAdapter.currentAddress("12345");
 
         assertThat(actualAddress, is(address));
+    }
+
+    @Test
+    public void blankAddress() {
+        Address actualAddress = accountAddressAdapter.blankAddress("12345");
+
+        assertThat(actualAddress, notNullValue());
     }
 
 }
